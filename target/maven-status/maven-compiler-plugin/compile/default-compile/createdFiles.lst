@@ -1,0 +1,11 @@
+ru\lugom\service\LocationService.class
+ru\lugom\service\LocationServiceImpl.class
+ru\lugom\repository\RoomRepository.class
+ru\lugom\controller\RoomController.class
+ru\lugom\Application.class
+ru\lugom\config\WebSocketConfig.class
+ru\lugom\model\Room.class
+ru\lugom\controller\SocketController.class
+ru\lugom\service\RoomService.class
+ru\lugom\config\RestResponseEntityExceptionHandler.class
+ru\lugom\service\RoomServiceImpl.class

@@ -12,8 +12,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/rooms">Все комнаты</a></li>
-                <li><a href="/create">Создать комнату</a></li>
+                <li><a href="/rooms">All rooms</a></li>
+                <li><a href="/create">Create room</a></li>
             </ul>
         </div>
     </div>

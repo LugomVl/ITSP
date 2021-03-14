@@ -13,8 +13,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/rooms">Все комнаты</a></li>
-                <li><a href="/create">Создать комнату</a></li>
+                <li class="active"><a href="/rooms">All rooms</a></li>
+                <li><a href="/create">Create room</a></li>
             </ul>
         </div>
     </div>
@@ -26,7 +26,9 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title ">Rooms</h4>
+                            <c:if test="${!error.equals('')}">
+                                <h3 style="color:#ff0000"><c:out value="${error}"/></h3>
+                            </c:if>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

@@ -1,6 +1,8 @@
 package ru.lugom.service;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,8 +16,8 @@ public class RoomServiceImpl implements RoomService{
 
     @Override
     @Transactional
-    public void create(Room room) {
-        roomRepository.save(room);
+    public Room create(Room room) {
+        return roomRepository.save(room);
     }
 
     @Override
@@ -26,18 +28,18 @@ public class RoomServiceImpl implements RoomService{
 
     @Override
     @Transactional
-    public Room findRoomById(long id) {
-        return roomRepository.findById(id).get();
+    public Optional<Room> findRoomById(long id) {
+        return roomRepository.findById(id);
     }
 
     @Override
     @Transactional
-    public void update(Room room) {
-        if (room.isLight()) {
-            room.setLight(false);
+    public Room update(Room room) {
+        if (room.getLight().equals("on")) {
+            room.setLight("off");
         } else {
-            room.setLight(true);
+            room.setLight("on");
         }
-        roomRepository.save(room);
+        return roomRepository.save(room);
     }
 }

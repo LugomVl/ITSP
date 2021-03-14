@@ -3,11 +3,12 @@ package ru.lugom.service;
 import ru.lugom.model.Room;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface RoomService {
-    void create(Room room);
+    Room create(Room room);
     List<Room> findAll();
-    Room findRoomById(long id);
-    void update(Room room);
+    Optional<Room> findRoomById(long id);
+    Room update(Room room);
 }

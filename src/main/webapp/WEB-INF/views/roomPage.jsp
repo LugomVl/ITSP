@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>Hello WebSocket</title>
+    <title>Room</title>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.4.0/dist/sockjs.min.js" type="text/javascript" ></script>
@@ -28,12 +29,12 @@
             console.log("Disconnected");
         }
 
-        function sendName() {
-            stompClient.send("/app/hello", {}, $("#name").val());
+        function sendName(){
+            stompClient.send("/app/hello", {}, ${room.id});
         }
 
         function showGreeting(message) {
-            $("#greetings").append("<tr><td>" + message + "</td></tr>");
+            document.getElementById('user_payment_sum').innerHTML = message;
         }
 
         $(function () {
@@ -45,32 +46,28 @@
     </script>
 </head>
 <body onload="connect();" onunload="disconnect();">
-<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
-    enabled. Please enable
-    Javascript and reload this page!</h2></noscript>
-<div id="main-content" class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="name">What is your name?</label>
-                    <input type="text" id="name" class="form-control" placeholder="Your name here...">
-                </div>
-                <button id="send" class="btn btn-default" type="submit">Send</button>
-            </form>
+<nav class="navbar navbar-inverse navbar-light">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Its Partner App</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/rooms">All rooms</a></li>
+                <li><a href="/create">Create room</a></li>
+            </ul>
         </div>
     </div>
-    <div class="row">
+</nav>
+<div class="container">
+    <div class="main">
         <div class="col-md-12">
-            <table id="conversation" class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Greetings</th>
-                </tr>
-                </thead>
-                <tbody id="greetings">
-                </tbody>
-            </table>
+            <div class="card">
+                <h4>Welcome to the room ${room.name}</h4>
+                <h4>Country: ${room.country}</h4>
+                <h4>Light: <span id="user_payment_sum">${room.light}</span></h4>
+                <input type="submit" class="btn btn-success" value="On/off" id="send"/>
+            </div>
         </div>
     </div>
 </div>

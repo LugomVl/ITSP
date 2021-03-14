@@ -13,6 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class Room {
     @Id
@@ -28,5 +29,5 @@ public class Room {
     private String country;
 
     @Column(name = "light")
-    private boolean light;
+    private String light;
 }

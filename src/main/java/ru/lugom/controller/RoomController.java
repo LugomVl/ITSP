@@ -15,10 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Enumeration;
 
 @Controller
 public class RoomController {
@@ -43,7 +40,7 @@ public class RoomController {
     }
 
     @GetMapping("/{id}")
-    public ModelAndView room(@PathVariable long id) throws IOException, GeoIp2Exception {
+    public ModelAndView room(@PathVariable long id, HttpServletRequest request) throws IOException, GeoIp2Exception {
         String ip = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
                 .getRequest().getRemoteAddr();
         if (ip.equals("0:0:0:0:0:0:0:1")) {
@@ -54,11 +51,15 @@ public class RoomController {
         }
         ModelAndView modelAndView = new ModelAndView();
         String country = service.getLocation(ip);
-        Room room = roomService.findRoomById(id);
-        if (country.equals(room.getCountry())) {
-            modelAndView.addObject(room);
-            modelAndView.setViewName("roomPage");
+        Room room = roomService.findRoomById(id).get();
+        if (!country.equals(room.getCountry())) {
+            modelAndView.addObject("error", "This room is not available for your country!");
+            modelAndView.setViewName("rooms");
+            modelAndView.addObject(roomService.findAll());
+            return modelAndView;
         }
+        modelAndView.addObject(room);
+        modelAndView.setViewName("roomPage");
         return modelAndView;
     }
 
@@ -74,14 +75,6 @@ public class RoomController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/rooms");
         roomService.create(room);
-        return modelAndView;
-    }
-
-    @GetMapping(value="/update/{id}")
-    public ModelAndView update(@PathVariable long id) {
-        ModelAndView modelAndView = new ModelAndView();
-        roomService.update(roomService.findRoomById(id));
-        modelAndView.setViewName("redirect:/"+id);
         return modelAndView;
     }
 }

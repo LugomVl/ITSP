@@ -33,13 +33,13 @@
                         <option value="Belarus">Belarus</option>
                         <option value="Russia">Russia</option>
                         <option value="Ukraine">Ukraine</option>
-                        <option value="Usa">USA</option>
+                        <option value="United States">United States</option>
                     </select>
                     <br>
                     <label for="light">Light</label>
                     <select name="light">
-                        <option value="true">On</option>
-                        <option value="false">Off</option>
+                        <option value="on">On</option>
+                        <option value="off">Off</option>
                     </select>
                     <br>
                     <input type="submit" class="btn btn-primary" value="Add new room">
@@ -48,6 +48,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>

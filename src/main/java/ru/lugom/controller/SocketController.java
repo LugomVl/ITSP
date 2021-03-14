@@ -11,15 +11,16 @@ import ru.lugom.service.RoomService;
 
 @Controller
 public class SocketController {
+    @Autowired
+    private RoomService roomService;
+
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public String greeting(String message) throws Exception {
-        System.out.println(message);
-        return "abracadabra";
+        return roomService.update(roomService.findRoomById(Integer.parseInt(message)).get()).getLight();
     }
-    /*@Autowired
-    private RoomService roomService;
 
+/*
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     @MessageExceptionHandler(MessageConversionException.class)
