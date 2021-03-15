@@ -21,7 +21,7 @@ public class RestResponseEntityExceptionHandler
             RuntimeException ex, WebRequest request) {
         String bodyOfResponse = null;
         if (ex instanceof ConstraintViolationException){
-            bodyOfResponse = "Some required field is empty. Please fill in all the fields to create a room.";
+            bodyOfResponse = "Some required field is empty or incorrect value. Please fill in all the fields correct values to create a room.";
         } else if (ex instanceof RuntimeException) {
             bodyOfResponse = "This name is already exist!";
         }

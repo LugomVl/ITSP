@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(
@@ -29,5 +30,7 @@ public class Room {
     private String country;
 
     @Column(name = "light")
+    @Pattern(message = "Only on/off values: ${validatedValue}",
+            regexp ="(on|off)")
     private String light;
 }
